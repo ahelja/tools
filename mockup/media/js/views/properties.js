@@ -11,6 +11,7 @@ usemockups.views.PropertyDialog = Backbone.View.extend({
         this.on("update_for_sizes", this.update_for_sizes);
         this.model.on("destroy", this.hide, this);
         this.footer = $("footer");
+        this.input = $('body');
     },
     render: function () {
 
@@ -38,6 +39,14 @@ usemockups.views.PropertyDialog = Backbone.View.extend({
             this.destroy();
             return false;
         }.bind(this));
+
+        this.input.on('keydown', function() {
+            var key = event.keyCode || event.charCode;
+            if( key == 8 || key == 46 ){
+                $("a.delete").click();
+                return false;
+            }
+        });
 
         return this;
     },
